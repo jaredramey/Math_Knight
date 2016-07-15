@@ -47,7 +47,6 @@ namespace MK //Math_Knight shorthand
 
 		#pragma region Operator_Overloads
 		Mat4x4 operator * (const Mat4x4 &factor);
-		Mat4x4 operator / (const Mat4x4 &dividen);
 		Mat4x4 operator + (const Mat4x4 &term);
 		Mat4x4 operator - (const Mat4x4 &term);
 		Mat4x4 operator = (const Mat4x4 &equivalent);
@@ -73,13 +72,13 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
-		Mat3x3 ScaleMat3();
-		Mat3x3 RotMat3_X();
-		Mat3x3 RotMat3_Y();
-		Mat3x3 RotMat3_Z();
-		Mat3x3 TransformMat3();
-		/*float GetElement(int column, int row);
-		void SetElement(int column, int row);*/
+		Mat3x3 ScaleMat3(float xChange, float yChange, Mat3x3 &otherMatrix);
+		Mat3x3 RotMat3_X(float degreeChange, Mat3x3 &otherMatrix);
+		Mat3x3 RotMat3_Y(float degreeChange, Mat3x3 &otherMatrix);
+		Mat3x3 RotMat3_Z(float degreeChange, Mat3x3 &otherMatrix);
+		Mat3x3 TransformMat3(float xChange, float yChange, Mat3x3 &otherMatrix);
+		float GetElement(int column, int row);
+		void SetElement(int column, int row);
 		//Mat3 MultMat3();
 		//Going to try an operator overload instead of a func. I feel like there was a reason
 		//why we didn't during the project. Can't remember if there was but i'll figure it out
@@ -90,23 +89,18 @@ namespace MK //Math_Knight shorthand
 		//TODO: Make more operator overloads then just multiplication for matricies. Don't think I'll need them but might as well just in case.
 		Mat3x3 operator * (const Mat3x3 &factor);
 		Mat3x3 operator * (const Mat3x1 &factor);
-		Mat3x3 operator / (const Mat3x3 &dividen);
 		Mat3x3 operator + (const Mat3x3 &term);
 		Mat3x3 operator - (const Mat3x3 &term);
 		Mat3x3 operator = (const Mat3x3 &equivalent);
 		bool operator == (const Mat3x3 &check);
 		#pragma endregion Operator_Overloads
 
-		#pragma region Mat3x3_typedef
-						//Struct is set up to represent a matrix in column row major
-		/*typedef struct{ float zeroZero, OneZero, twoZero;
-						float zeroOne , oneOne , twoOne ;
-						float zeroTwo , OneTwo , twoTwo ;   } mat3x3;*/
-
-		typedef float mat3x3[3][3];
-		 
-		//typedef std::vector<std::vector<float>> mat3x3;
-		#pragma endregion Mat3x3_typedef
+		#pragma region Mat3x3_def
+		//Struct is set up to represent a matrix in column row major
+		struct{ float zeroZero, OneZero, twoZero,
+					  zeroOne , oneOne , twoOne,
+					  zeroTwo , OneTwo , twoTwo ;   } entries;
+		#pragma endregion Mat3x3_def
 
 	};
 
@@ -154,7 +148,7 @@ namespace MK //Math_Knight shorthand
 		Vec4 operator - (const Vec4 &term);
 		Vec4 operator -= (const Vec4 &term);
 		Vec4 operator = (const Vec4 &equivalent);
-		bool operator == (const Vec4 &check)
+		bool operator == (const Vec4 &check);
 		#pragma endregion Operator_Overloads
 
 		#pragma region Vec4_typedef
