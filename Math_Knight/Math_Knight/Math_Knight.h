@@ -31,8 +31,8 @@ namespace MK //Math_Knight shorthand
 		#pragma region Constructors
 		Mat4x4();
 		Mat4x4(std::vector<std::vector<float>> &matrix);
-		Mat4x4(float matrix[4][4]);
-		Mat4x4(float matrix[16]);
+		Mat4x4(float matrix[3][3]);
+		Mat4x4(float matrix[15]);
 		~Mat4x4();
 		#pragma endregion Constructors
 
@@ -66,8 +66,10 @@ namespace MK //Math_Knight shorthand
 		#pragma region Constructors
 		Mat3x3();
 		Mat3x3(std::vector<std::vector<float>> &matrix);
-		Mat3x3(float matrix[3][3]);
-		Mat3x3(float matrix[9]);
+		Mat3x3(float matrix[2][2]);
+		Mat3x3(float matrix[8]);
+		//Why someone would do this to themselves, I have no idea.
+		Mat3x3(float zeroZero, float zeroOne, float zeroTwo, float oneZero, float oneOne, float oneTwo, float twoZero, float twoOne, float twoTwo);
 		~Mat3x3();
 		#pragma endregion Constructors
 
@@ -79,16 +81,13 @@ namespace MK //Math_Knight shorthand
 		Mat3x3 TransformMat3(float xChange, float yChange, Mat3x3 &otherMatrix);
 		float GetElement(int column, int row);
 		void SetElement(int column, int row);
-		//Mat3 MultMat3();
-		//Going to try an operator overload instead of a func. I feel like there was a reason
-		//why we didn't during the project. Can't remember if there was but i'll figure it out
-		//once I get to filling it out.
 		#pragma endregion Custom_Functions
 		 
 		#pragma region Operator_Overloads
 		//TODO: Make more operator overloads then just multiplication for matricies. Don't think I'll need them but might as well just in case.
 		Mat3x3 operator * (const Mat3x3 &factor);
-		Mat3x3 operator * (const Mat3x1 &factor);
+		//Moved this function to Mat3x1 since it effects that Mat more
+		//Mat3x3 operator * (const Mat3x1 &factor);
 		Mat3x3 operator + (const Mat3x3 &term);
 		Mat3x3 operator - (const Mat3x3 &term);
 		Mat3x3 operator = (const Mat3x3 &equivalent);
@@ -97,9 +96,9 @@ namespace MK //Math_Knight shorthand
 
 		#pragma region Mat3x3_def
 		//Struct is set up to represent a matrix in column row major
-		struct{ float zeroZero, OneZero, twoZero,
+		struct{ float zeroZero, oneZero, twoZero,
 					  zeroOne , oneOne , twoOne,
-					  zeroTwo , OneTwo , twoTwo ;   } entries;
+					  zeroTwo , oneTwo , twoTwo ;   } entries;
 		#pragma endregion Mat3x3_def
 
 	};
@@ -115,9 +114,17 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
+		Mat3x1 operator * (const Mat3x1 &factor);
+		//Putting this here for later since this effects a mat3x1 more then the mat3x3
+		/*{
+			someVector[0] = ((someVector[0] * someMatrix.zeroZero) + (someVector[0] * someMatrix.zeroOne) + (someVector[0] * someMatrix.zeroTwo));
+			someVector[1] = ((someVector[1] * someMatrix.oneZero) + (someVector[1] * someMatrix.oneOne) + (someVector[1] * someMatrix.oneTwo));
+			someVector[2] = ((someVector[2] * someMatrix.twoZero) + (someVector[2] * someMatrix.twoOne) + (someVector[2] * someMatrix.twoTwo));
+		}*/
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
+		struct{ float zeroZero, oneZero, twoZero; } entries;
 		#pragma endregion Operator_Overloads
 	};
 
