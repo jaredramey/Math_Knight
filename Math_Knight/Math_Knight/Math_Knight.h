@@ -33,16 +33,21 @@ namespace MK //Math_Knight shorthand
 		Mat4x4(std::vector<std::vector<float>> &matrix);
 		Mat4x4(float matrix[3][3]);
 		Mat4x4(float matrix[15]);
+		//Why someone would do this to themselves, I have no idea...
+		Mat4x4(float zeroZero, float zeroOne, float zeroTwo, float zeroThree,
+			   float oneZero, float oneOne, float oneTwo, float oneThree,
+			   float twoZero, float twoOne, float twoTwo, float twoThree,
+			   float threeZero, float threeOne, float threeTwo, float threeThree);
 		~Mat4x4();
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
-		Mat4x4 OrthographicProjection();
-		Mat4x4 ScaleMat4();
-		Mat4x4 RotMat4_X();
-		Mat4x4 RotMat4_Y();
-		Mat4x4 RotMat4_Z();
-		Mat4x4 TransformMat4();
+		Mat4x4 OrthographicProjection(float left, float right, float top, float bottom, float near, float far, Mat4x4 &otherMatrix);
+		Mat4x4 ScaleMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix);
+		Mat4x4 RotMat4_X(float degreeChange, Mat4x4 &otherMatrix);
+		Mat4x4 RotMat4_Y(float degreeChange, Mat4x4 &otherMatrix);
+		Mat4x4 RotMat4_Z(float degreeChange, Mat4x4 &otherMatrix);
+		Mat4x4 TransformMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix);
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
@@ -54,11 +59,13 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Operator_Overloads
 
 		#pragma region typedef_Mat4x4
-		typedef float mat4x4[4][4];
+		struct{	float zeroZero, oneZero, twoZero, threeZero,
+					  zeroOne, oneOne, twoOne, threeOne,
+					  zeroTwo, oneTwo, twoTwo, threeTwo,
+					  zeroThree, oneThree, twoThree, threeThree;		} entries;
 		#pragma endregion typedef_Mat4x4
 	};
 
-	//TODO: Fill Out Mat3 Funcs & decide how to represent a Mat3
 	class Mat3x3
 	{
 	public:
@@ -68,7 +75,7 @@ namespace MK //Math_Knight shorthand
 		Mat3x3(std::vector<std::vector<float>> &matrix);
 		Mat3x3(float matrix[2][2]);
 		Mat3x3(float matrix[8]);
-		//Why someone would do this to themselves, I have no idea.
+		//Why someone would do this to themselves, I have no idea...
 		Mat3x3(float zeroZero, float zeroOne, float zeroTwo, float oneZero, float oneOne, float oneTwo, float twoZero, float twoOne, float twoTwo);
 		~Mat3x3();
 		#pragma endregion Constructors
