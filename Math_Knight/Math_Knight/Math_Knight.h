@@ -47,7 +47,7 @@ namespace MK //Math_Knight shorthand
 		Mat4x4 RotMat4_X(float degreeChange, Mat4x4 &otherMatrix);
 		Mat4x4 RotMat4_Y(float degreeChange, Mat4x4 &otherMatrix);
 		Mat4x4 RotMat4_Z(float degreeChange, Mat4x4 &otherMatrix);
-		Mat4x4 TransformMat4(float degreeChange, Mat4x4 &otherMatrix);
+		Mat4x4 TransformMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix);
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
@@ -66,7 +66,6 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion typedef_Mat4x4
 	};
 
-	//TODO: Fill Out Mat3 Funcs & decide how to represent a Mat3
 	class Mat3x3
 	{
 	public:

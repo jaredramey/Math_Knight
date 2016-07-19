@@ -125,46 +125,316 @@ namespace MK
 	}
 	Mat4x4 Mat4x4::ScaleMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix)
 	{
-	
+		std::vector<std::vector<float>> changeMatrix =
+		{
+			{ xChange, 0, 0, 0 },
+			{ 0, yChange, 0, 0 },
+			{ 0, 0, zChange, 0 },
+			{ 0, 0, 0, 1 }
+		};
+
+		Mat4x4 changeMat = Mat4x4(changeMatrix);
+
+		return changeMat * otherMatrix;
 	}
 	Mat4x4 Mat4x4::RotMat4_X(float degreeChange, Mat4x4 &otherMatrix)
 	{
-	
+		std::vector<std::vector<float>> changeMatrix =
+		{
+			{ 1, 0, 0, 0 },
+			{ 0, (cos(degreeChange)), (asin(degreeChange)), 0 },
+			{ 0, (sin(degreeChange)), (cos(degreeChange)), 0 },
+			{ 0, 0, 0, 1 }
+		};
+
+		Mat4x4 changeMat = Mat4x4(changeMatrix);
+
+		return changeMat * otherMatrix;
 	}
 	Mat4x4 Mat4x4::RotMat4_Y(float degreeChange, Mat4x4 &otherMatrix)
 	{
-	
+		std::vector<std::vector<float>> changeMatrix =
+		{
+			{ (cos(degreeChange)), 0, (asin(degreeChange)), 0 },
+			{ 0, 1, 0, 0 },
+			{ (sin(degreeChange)), 0, (cos(degreeChange)), 0 },
+			{ 0, 0, 0, 1 }
+		};
+
+		Mat4x4 changeMat = Mat4x4(changeMatrix);
+
+		return changeMat * otherMatrix;
 	}
 	Mat4x4 Mat4x4::RotMat4_Z(float degreeChange, Mat4x4 &otherMatrix)
 	{
-	
+		std::vector<std::vector<float>> changeMatrix =
+		{
+			{ (cos(degreeChange)), (sin(degreeChange)), 0, 0 },
+			{ (asin(degreeChange)), (cos(degreeChange)), 0, 0 },
+			{ 0, 0, 1, 0 },
+			{ 0, 0, 0, 1 }
+		};
+
+		Mat4x4 changeMat = Mat4x4(changeMatrix);
+
+		return changeMat * otherMatrix;
 	}
-	Mat4x4 Mat4x4::TransformMat4(float degreeChange, Mat4x4 &otherMatrix)
+	Mat4x4 Mat4x4::TransformMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix)
 	{
-	
+		std::vector<std::vector<float>> changeMatrix =
+		{
+			{ 1, 0, 0, 0 },
+			{ 0, 1, 0, 0 },
+			{ 0, 0, 1, 0 },
+			{ xChange, yChange, zChange, 1 }
+		};
+
+		Mat4x4 changeMat = Mat4x4(changeMatrix);
+
+		return changeMat * otherMatrix;
 	}
 #pragma endregion Custom_Functions
 
 #pragma region Operator_Overloads
 	Mat4x4 Mat4x4::operator * (const Mat4x4 &factor)
 	{
-	
+		entries.zeroZero = ((entries.zeroZero*factor.entries.zeroZero) + (entries.zeroOne*factor.entries.oneZero) + (entries.zeroTwo*factor.entries.twoZero) + (entries.zeroThree*factor.entries.threeZero));		//	{x, x, x, x}
+		entries.zeroOne = ((entries.zeroZero*factor.entries.zeroOne) + (entries.zeroOne*factor.entries.oneOne) + (entries.zeroTwo*factor.entries.twoOne) + (entries.zeroThree*factor.entries.threeOne));			//	{O, O, O, O}
+		entries.zeroTwo = ((entries.zeroZero*factor.entries.zeroTwo) + (entries.zeroOne*factor.entries.oneTwo) + (entries.zeroTwo*factor.entries.twoTwo) + (entries.zeroThree*factor.entries.threeTwo));			//	{O, O, O, O}
+		entries.zeroThree = ((entries.zeroZero*factor.entries.zeroThree) + (entries.zeroOne*factor.entries.oneThree) + (entries.zeroTwo*factor.entries.twoThree) + (entries.zeroThree*factor.entries.threeThree));	//	{O, O, O, O}
+		/*Second Row*/
+		entries.oneZero = ((entries.oneZero*factor.entries.oneZero) + (entries.oneOne*factor.entries.zeroOne) + (entries.oneTwo*factor.entries.twoZero) + (entries.oneThree*factor.entries.threeZero));			//		{O, O, O, O}
+		entries.oneOne = ((entries.oneZero*factor.entries.oneOne) + (entries.oneOne*factor.entries.oneOne) + (entries.oneTwo*factor.entries.oneTwo) + (entries.oneThree*factor.entries.threeOne));				//		{x, x, x, x}
+		entries.oneTwo = ((entries.oneZero*factor.entries.oneTwo) + (entries.oneOne*factor.entries.twoOne) + (entries.oneTwo*factor.entries.twoTwo) + (entries.oneThree*factor.entries.threeTwo));				//		{O, O, O, O}
+		entries.oneThree = (entries.oneZero*factor.entries.oneThree) + (entries.zeroOne*factor.entries.threeOne) + (entries.zeroTwo*factor.entries.threeTwo) + (entries.zeroThree*factor.entries.threeThree);	//      {O, O, O, O}
+		/*Third Row*/
+		entries.twoZero = ((entries.twoZero*factor.entries.twoZero) + (entries.twoOne*factor.entries.zeroOne) + (entries.twoTwo*factor.entries.zeroTwo) + (entries.twoThree*factor.entries.threeZero));			//		{O, O, O, O}
+		entries.twoOne = ((entries.twoZero*factor.entries.twoOne) + (entries.twoOne*factor.entries.oneOne) + (entries.twoTwo*factor.entries.oneTwo) + (entries.twoThree*factor.entries.threeOne));				//		{O, O, O, O}
+		entries.twoTwo = ((entries.twoZero*factor.entries.twoTwo) + (entries.twoOne*factor.entries.twoOne) + (entries.twoTwo*factor.entries.twoTwo) + (entries.twoThree*factor.entries.threeTwo));				//		{x, x, x, x}
+		entries.twoThree = ((entries.twoZero*factor.entries.twoThree) + (entries.twoOne*factor.entries.threeOne) + (entries.threeTwo*factor.entries.twoTwo) + (entries.twoThree*factor.entries.threeThree));	//		{O, O, O, O}
+		/*Fourth Row*/
+		entries.threeZero = ((entries.threeZero*factor.entries.threeZero) + (entries.threeOne*factor.entries.zeroOne) + (entries.threeTwo*factor.entries.zeroTwo) + (entries.threeThree*factor.entries.zeroThree));
+		entries.threeOne = ((entries.threeZero*factor.entries.threeOne) + (entries.threeOne*factor.entries.oneOne) + (entries.threeTwo*factor.entries.oneTwo) + (entries.threeThree*factor.entries.oneThree));
+		entries.threeTwo = ((entries.threeZero*factor.entries.threeTwo) + (entries.threeOne*factor.entries.twoOne) + (entries.threeTwo*factor.entries.twoTwo) + (entries.threeThree*factor.entries.twoThree));
+		entries.threeThree = ((entries.threeZero*factor.entries.threeThree) + (entries.threeOne*factor.entries.threeOne) + (entries.threeTwo*factor.entries.threeTwo) + (entries.threeThree*factor.entries.threeThree));
 	}
 	Mat4x4 Mat4x4::operator + (const Mat4x4 &term)
 	{
-	
+		/*First Row*/
+		entries.zeroZero = entries.zeroZero + term.entries.zeroZero;	//	{x, x, x, x}
+		entries.zeroOne = entries.zeroOne + term.entries.zeroOne;		//	{O, O, O, O}
+		entries.zeroTwo = entries.zeroTwo + term.entries.zeroTwo;		//	{O, O, O, O}
+		entries.zeroThree = entries.zeroThree + term.entries.zeroThree; //  {O, O, O, O}
+		/*Second Row*/
+		entries.oneZero = entries.oneZero + term.entries.oneZero;		//		{O, O, O, O}
+		entries.oneOne = entries.oneOne + term.entries.oneOne;			//		{x, x, x, x}
+		entries.oneTwo = entries.oneTwo + term.entries.oneTwo;			//		{O, O, O, O}
+		entries.oneThree = entries.oneThree + term.entries.oneThree;    //      {O, O, O, O}
+		/*Third Row*/
+		entries.twoZero = entries.twoZero + term.entries.twoZero;		//			{O, O, O, O}
+		entries.twoOne = entries.twoOne + term.entries.twoZero;			//			{O, O, O, O}
+		entries.twoTwo = entries.twoTwo + term.entries.zeroTwo;			//			{x, x, x, x}
+		entries.twoThree = entries.twoThree + term.entries.twoThree;    //			{O, O, O, O}
+		/*Fourth Row*/
+		entries.twoZero = entries.threeZero + term.entries.threeZero;	//				{O, O, O, O}
+		entries.twoOne = entries.threeOne + term.entries.threeZero;		//				{O, O, O, O}
+		entries.twoTwo = entries.threeTwo + term.entries.threeTwo;		//				{O, O, O, O}
+		entries.twoThree = entries.threeThree + term.entries.threeThree;//				{x, x, x, x}
+
 	}
 	Mat4x4 Mat4x4::operator - (const Mat4x4 &term)
 	{
-	
+		/*First Row*/
+		entries.zeroZero = entries.zeroZero - term.entries.zeroZero;	//	{x, x, x, x}
+		entries.zeroOne = entries.zeroOne - term.entries.zeroOne;		//	{O, O, O, O}
+		entries.zeroTwo = entries.zeroTwo - term.entries.zeroTwo;		//	{O, O, O, O}
+		entries.zeroThree = entries.zeroThree - term.entries.zeroThree; //  {O, O, O, O}
+		/*Second Row*/
+		entries.oneZero = entries.oneZero - term.entries.oneZero;		//		{O, O, O, O}
+		entries.oneOne = entries.oneOne - term.entries.oneOne;			//		{x, x, x, x}
+		entries.oneTwo = entries.oneTwo - term.entries.oneTwo;			//		{O, O, O, O}
+		entries.oneThree = entries.oneThree - term.entries.oneThree;    //      {O, O, O, O}
+		/*Third Row*/
+		entries.twoZero = entries.twoZero - term.entries.twoZero;		//			{O, O, O, O}
+		entries.twoOne = entries.twoOne - term.entries.twoZero;			//			{O, O, O, O}
+		entries.twoTwo = entries.twoTwo - term.entries.zeroTwo;			//			{x, x, x, x}
+		entries.twoThree = entries.twoThree - term.entries.twoThree;    //			{O, O, O, O}
+		/*Fourth Row*/
+		entries.twoZero = entries.threeZero - term.entries.threeZero;	//				{O, O, O, O}
+		entries.twoOne = entries.threeOne - term.entries.threeZero;		//				{O, O, O, O}
+		entries.twoTwo = entries.threeTwo - term.entries.threeTwo;		//				{O, O, O, O}
+		entries.twoThree = entries.threeThree - term.entries.threeThree;//				{x, x, x, x}
 	}
 	Mat4x4 Mat4x4::operator = (const Mat4x4 &equivalent)
 	{
-	
+		/*First Row*/
+		entries.zeroZero = equivalent.entries.zeroZero;		//	{x, x, x, x}
+		entries.zeroOne = equivalent.entries.zeroOne;		//	{O, O, O, O}
+		entries.zeroTwo = equivalent.entries.zeroTwo;		//	{O, O, O, O}
+		entries.zeroThree = equivalent.entries.zeroThree;	//  {O, O, O, O}
+		/*Second Row*/
+		entries.oneZero = equivalent.entries.oneZero;		//		{O, O, O, O}
+		entries.oneOne = equivalent.entries.oneOne;			//		{x, x, x, x}
+		entries.oneTwo = equivalent.entries.oneTwo;			//		{O, O, O, O}
+		entries.oneThree = equivalent.entries.oneThree;     //      {O, O, O, O}
+		/*Third Row*/
+		entries.twoZero = equivalent.entries.twoZero;		//			{O, O, O, O}
+		entries.twoOne = equivalent.entries.twoZero;		//			{O, O, O, O}
+		entries.twoTwo = equivalent.entries.zeroTwo;		//			{x, x, x, x}
+		entries.twoThree = equivalent.entries.twoThree;		//			{O, O, O, O}
+		/*Fourth Row*/
+		entries.twoZero = equivalent.entries.threeZero;		//				{O, O, O, O}
+		entries.twoOne = equivalent.entries.threeZero;		//				{O, O, O, O}
+		entries.twoTwo = equivalent.entries.threeTwo;		//				{O, O, O, O}
+		entries.twoThree = equivalent.entries.threeThree;	//				{x, x, x, x}
 	}
 	bool Mat4x4::operator == (const Mat4x4 &check)
 	{
-	
+		//[0][0] == [0][0] 
+		if (entries.zeroZero == check.entries.zeroZero)
+		{
+			//[0][1] == [0][1]
+			if (entries.zeroOne == check.entries.zeroOne)
+			{
+				//[0][2] == [0][2]
+				if (entries.zeroTwo == check.entries.zeroTwo)
+				{
+					//[0][3] == [0][3]
+					if (entries.zeroThree == check.entries.zeroThree)
+					{
+						//[1][0] == [1][0]
+						if (entries.oneZero == check.entries.oneZero)
+						{
+							//[1][1] == [1][1]
+							if (entries.oneOne == check.entries.oneOne)
+							{
+								//[1][2] == [1][2]
+								if (entries.oneTwo == check.entries.oneTwo)
+								{
+									//[1][3] == [1][3]
+									if (entries.oneThree == check.entries.oneThree)
+									{
+										//[2][0] == [2][0]
+										if (entries.twoZero == check.entries.twoZero)
+										{
+											//[2][1] == [2][1]
+											if (entries.twoOne == check.entries.twoOne)
+											{
+												//[2][2] == [2][2]
+												if (entries.twoTwo == check.entries.twoTwo)
+												{
+													//[2][3] == [2][3]
+													if (entries.twoThree == check.entries.twoThree)
+													{
+														//[3][0] == [3][0]
+														if (entries.threeZero == check.entries.threeZero)
+														{
+															//[3][1] == [3][1]
+															if (entries.threeOne == check.entries.threeOne)
+															{
+																//[3][2] == [3][2]
+																if (entries.threeTwo == check.entries.threeTwo)
+																{
+																	//[3][3] == [3][3]
+																	if (entries.twoTwo == check.entries.twoTwo)
+																	{
+																		return true;
+																	}
+																	//[3][3] == [3][3]
+																	else
+																	{
+																		return false;
+																	}
+																}
+																//[3][2] == [3][2]
+																else
+																{
+																	return false;
+																}
+															}
+															//[3][1] == [3][1]
+															else
+															{
+																return false;
+															}
+														}
+														//[3][0] == [3][0]
+														else
+														{
+															return false;
+														}
+													}
+													//[2][3] == [2][3]
+													else
+													{
+														return false;
+													}
+												}
+												//[2][2] == [2][2]
+												else
+												{
+													return false;
+												}
+											}
+											//[2][1] == [2][1]
+											else
+											{
+												return false;
+											}
+										}
+										//[2][0] == [2][0]
+										else
+										{
+											return false;
+										}
+									}
+									//[1][3] == [1][3]
+									else
+									{
+										return false;
+									}
+								}
+								//[1][2] == [1][2]
+								else
+								{
+									return false;
+								}
+							}
+							//[1][1] == [1][1]
+							else
+							{
+								return false;
+							}
+						}
+						//[1][0] == [1][0]
+						else
+						{
+							return false;
+						}
+					}
+					//[0][3] == [0][3]
+					else
+					{
+						return false;
+					}
+				}
+				//[0][2] == [0][2]
+				else
+				{
+					return false;
+				}
+			}
+			//[0][1] == [0][1]
+			else
+			{
+				return false;
+			}
+		}
+		//[0][0] == [0][0] 
+		else
+		{
+			return false;
+		}
 	}
 #pragma endregion Operator_Overloads
 }
