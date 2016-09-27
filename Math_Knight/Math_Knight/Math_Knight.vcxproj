@@ -79,6 +79,7 @@
     <ClInclude Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Math_Knight.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat3x1.cpp" />
     <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat3x3.cpp" />
     <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat4x4.cpp" />
   </ItemGroup>

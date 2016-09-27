@@ -29,5 +29,8 @@
     <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat4x4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat3x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
