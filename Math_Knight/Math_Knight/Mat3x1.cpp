@@ -32,9 +32,48 @@ namespace MK
 	#pragma endregion
 
 	#pragma region Operator_Overloads
-	Mat3x1 Mat3x1::operator * (const Mat3x1 &term)
+	//This operator overload is used to multiply a 3x1 matricie by a 3x3 matricie
+	Mat3x1 Mat3x1::operator * (const Mat3x3 &term)
 	{
+		entries.zeroZero = ((entries.zeroZero * term.entries.zeroZero) + (entries.zeroZero * term.entries.zeroOne) + (entries.zeroZero * term.entries.zeroTwo));
+		entries.oneZero = ((entries.oneZero * term.entries.oneZero) + (entries.oneZero * term.entries.oneOne) + (entries.oneZero * term.entries.oneTwo));
+		entries.twoZero = ((entries.twoZero * term.entries.twoZero) + (entries.twoZero * term.entries.twoOne) + (entries.twoZero * term.entries.twoTwo));
+	}
 
+	Mat3x1 Mat3x1::operator - (const Mat3x1 &term)
+	{
+		entries.zeroZero = (entries.zeroZero - term.entries.zeroZero);
+		entries.oneZero = (entries.oneZero - term.entries.oneZero);
+		entries.twoZero = (entries.twoZero - term.entries.twoZero);
+	}
+
+	Mat3x1 Mat3x1::operator + (const Mat3x1 &term)
+	{
+		entries.zeroZero = (entries.zeroZero + term.entries.zeroZero);
+		entries.oneZero = (entries.oneZero + term.entries.oneZero);
+		entries.twoZero = (entries.twoZero + term.entries.twoZero);
+	}
+
+	Mat3x1 Mat3x1::operator = (const Mat3x1 &equivalent)
+	{
+		entries.zeroZero = equivalent.entries.zeroZero;
+		entries.oneZero = equivalent.entries.oneZero;
+		entries.twoZero = equivalent.entries.twoZero;
+	}
+
+	bool Mat3x1::operator == (const Mat3x1 &check)
+	{
+		if (entries.zeroZero == check.entries.zeroZero &&
+			entries.oneZero == check.entries.oneZero &&
+			entries.twoZero == check.entries.twoZero)
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
 	}
 	#pragma endregion
 }

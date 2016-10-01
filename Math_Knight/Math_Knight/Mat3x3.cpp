@@ -237,6 +237,28 @@ namespace MK
 
 	bool Mat3x3::operator == (const Mat3x3 &check)
 	{
+		//Looks a bit cleaner, still prob not the best solution though.
+		//It's a step in the right direction at least.
+		if (entries.zeroZero == check.entries.zeroZero &&	//[0][0] == [0][0]  
+			entries.zeroOne == check.entries.zeroOne &&		//[0][1] == [0][1]
+			entries.zeroTwo == check.entries.zeroTwo &&		//[0][2] == [0][2]
+			entries.oneZero == check.entries.oneZero &&		//[1][0] == [1][0]
+			entries.oneOne == check.entries.oneOne &&		//[1][1] == [1][1]
+			entries.oneTwo == check.entries.oneTwo &&		//[1][2] == [1][2]
+			entries.twoZero == check.entries.twoZero &&		//[2][0] == [2][0]
+			entries.twoOne == check.entries.twoOne &&		//[2][1] == [2][1]
+			entries.twoTwo == check.entries.twoTwo)			//[2][2] == [2][2]
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+
+		//Old version of the above statement
+		/*
 		//[0][0] == [0][0] 
 		if (entries.zeroZero == check.entries.zeroZero)
 		{
@@ -319,6 +341,7 @@ namespace MK
 		{
 			return false;
 		}
+		*/
 	}
 #pragma endregion Operator_Overloads
 }

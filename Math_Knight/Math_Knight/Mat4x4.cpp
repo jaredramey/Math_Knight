@@ -290,6 +290,35 @@ namespace MK
 	}
 	bool Mat4x4::operator == (const Mat4x4 &check)
 	{
+		//Looks a bit cleaner, still prob not the best solution though.
+		//It's a step in the right direction at least.
+		if (entries.zeroZero == check.entries.zeroZero &&	//[0][0] == [0][0]  
+			entries.zeroOne == check.entries.zeroOne &&		//[0][1] == [0][1]
+			entries.zeroTwo == check.entries.zeroTwo &&		//[0][2] == [0][2]
+			entries.zeroThree == check.entries.zeroThree && //[0][3] == [0][3]
+			entries.oneZero == check.entries.oneZero &&		//[1][0] == [1][0]
+			entries.oneOne == check.entries.oneOne &&		//[1][1] == [1][1]
+			entries.oneTwo == check.entries.oneTwo &&		//[1][2] == [1][2]
+			entries.oneThree == check.entries.oneThree &&	//[1][3] == [1][3]
+			entries.twoZero == check.entries.twoZero &&		//[2][0] == [2][0]
+			entries.twoOne == check.entries.twoOne &&		//[2][1] == [2][1]
+			entries.twoTwo == check.entries.twoTwo &&		//[2][2] == [2][2]
+			entries.twoThree == check.entries.twoThree &&	//[2][3] == [2][3]
+			entries.threeZero == check.entries.threeZero && //[3][0] == [3][0]
+			entries.threeOne == check.entries.threeOne &&	//[3][1] == [3][1]
+			entries.threeTwo == check.entries.threeTwo &&	//[3][2] == [3][2]
+			entries.threeThree == check.entries.threeThree) //[3][3] == [3][3]
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+
+		//Old version of the above statement
+		/*
 		//[0][0] == [0][0] 
 		if (entries.zeroZero == check.entries.zeroZero)
 		{
@@ -336,7 +365,7 @@ namespace MK
 																if (entries.threeTwo == check.entries.threeTwo)
 																{
 																	//[3][3] == [3][3]
-																	if (entries.twoTwo == check.entries.twoTwo)
+																	if (entries.threeThree == check.entries.threeThree)
 																	{
 																		return true;
 																	}
@@ -435,6 +464,7 @@ namespace MK
 		{
 			return false;
 		}
+		*/
 	}
 #pragma endregion Operator_Overloads
 }

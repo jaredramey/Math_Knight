@@ -121,13 +121,11 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
-		Mat3x1 operator * (const Mat3x1 &factor);
-		//Putting this here for later since this effects a mat3x1 more then the mat3x3
-		/*{
-			someVector[0] = ((someVector[0] * someMatrix.zeroZero) + (someVector[0] * someMatrix.zeroOne) + (someVector[0] * someMatrix.zeroTwo));
-			someVector[1] = ((someVector[1] * someMatrix.oneZero) + (someVector[1] * someMatrix.oneOne) + (someVector[1] * someMatrix.oneTwo));
-			someVector[2] = ((someVector[2] * someMatrix.twoZero) + (someVector[2] * someMatrix.twoOne) + (someVector[2] * someMatrix.twoTwo));
-		}*/
+		Mat3x1 operator * (const Mat3x3 &factor);
+		Mat3x1 operator - (const Mat3x1 &term);
+		Mat3x1 operator + (const Mat3x1 &term);
+		Mat3x1 operator = (const Mat3x1 &equivalent);
+		bool operator == (const Mat3x1 &check);
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
