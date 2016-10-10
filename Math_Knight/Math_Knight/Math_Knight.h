@@ -153,8 +153,6 @@ namespace MK //Math_Knight shorthand
 		#pragma region Operator_Overloads
 		Vec4 operator * (const Vec4 &factor);
 		Vec4 operator *= (const Vec4 &factor);
-		Vec4 operator / (const Vec4 &dividen);
-		Vec4 operator /= (const Vec4 &dividen);
 		Vec4 operator + (const Vec4 &term);
 		Vec4 operator += (const Vec4 &term);
 		Vec4 operator - (const Vec4 &term);
@@ -164,6 +162,7 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Operator_Overloads
 
 		#pragma region Vec4_typedef
+		struct{ float X, Y, Z, W; } entries;
 		#pragma endregion Vec4_typedef
 		 
 	};
@@ -176,12 +175,25 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
+		float Magnitude(const Vec3);
+		float DotProduct(const Vec3 &otherVec3);
+		float CrossProduct(const Vec3 &otherVec3);
+		Vec3 Normalize(const Vec3);
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
+		Vec3 operator * (const Vec3 &factor);
+		Vec3 operator *= (const Vec3 &factor);
+		Vec3 operator + (const Vec3 &term);
+		Vec3 operator += (const Vec3 &term);
+		Vec3 operator - (const Vec3 &term);
+		Vec3 operator -= (const Vec3 &term);
+		Vec3 operator = (const Vec3 &equivalent);
+		bool operator == (const Vec3 &equals);
 		#pragma endregion Operator_Overloads
 
 		#pragma region Vec3_typedef
+		struct{ float X, Y, Z; } entries;
 		#pragma endregion Vec3_typedef
 	};
 
@@ -193,12 +205,25 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
+		float Magnitude(const Vec2);
+		float DotProduct(const Vec2 &otherVec2);
+		float CrossProduct(const Vec2 &otherVec2);
+		float Lerp(const Vec2 &otherVec, float percentage);
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
+		Vec2 operator * (const Vec2 &factor);
+		Vec2 operator *= (const Vec2 &factor);
+		Vec2 operator + (const Vec2 &term);
+		Vec2 operator += (const Vec2 &term);
+		Vec2 operator - (const Vec2 &term);
+		Vec2 operator -= (const Vec2 &term);
+		Vec2 operator = (const Vec2 &equivalent);
+		bool operator == (const Vec2 &equals);
 		#pragma endregion Operator_Overloads
 
 		#pragma region Vec2_typedef
+		struct{ float X, Y; } entries;
 		#pragma endregion Vec2_typedef
 	};
 }
