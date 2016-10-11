@@ -23,7 +23,7 @@ namespace MK //Math_Knight shorthand
 		bool IsPowerOfTwo();
 	};
 
-	//TODO: Fill Out Mat4 Funcs & decide how to represent a Mat4
+	//TODO: Create & fillout constructor from 4 Vec4's
 	class Mat4x4
 	{
 	public:
@@ -66,6 +66,7 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion typedef_Mat4x4
 	};
 
+	//TODO: Create & fillout constructor from 3 Vec3's
 	class Mat3x3
 	{
 	public:
@@ -110,6 +111,7 @@ namespace MK //Math_Knight shorthand
 
 	};
 
+	//TODO: Create & fillout constructor from Vec3
 	class Mat3x1
 	{
 	public:
@@ -133,7 +135,7 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Operator_Overloads
 	};
 
-	//TODO: Fill Out Vec4 Funcs & decide how to represent a Vec4
+	//TODO: Fill Out Vec4 Funcs
 	class Vec4
 	{
 	public:
@@ -167,11 +169,16 @@ namespace MK //Math_Knight shorthand
 		 
 	};
 
-	//TODO: Fill Out Vec3 Funcs & decide how to represent a Vec3
+	//TODO: Fill Out Vec3 Funcs
 	class Vec3
 	{
 	public:
 		#pragma region Constructors
+		Vec3();
+		Vec3(float X, float Y, float Z);
+		Vec3(std::vector<float> &vector);
+		Vec3(float vector[3]);
+		~Vec3();
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
@@ -197,11 +204,16 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Vec3_typedef
 	};
 
-	//TODO: Fill Out Vec2 Funcs & decide how to represent a Vec2
+	//TODO: Fill Out Vec2 Funcs
 	class Vec2
 	{
 	public:
 		#pragma region Constructors
+		Vec2();
+		Vec2(float X, float Y);
+		Vec2(std::vector<float> &vector);
+		Vec2(float vector[2]);
+		~Vec2();
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
