@@ -4,12 +4,15 @@
 */
 
 //NOTE: THIS LIBRARY USES COLUMN ROW MAJOR. MAKE SURE YOUR MATRICIES ARE SET UP AS SUCH.
-//TODO: Figure out how I want to lay all my classes out. I'll finish up mat3x3 and use it as the basis for how the other classes should look.
 
 #include <string>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <vector>
+
+//Defining pi so I don't have to type it out
+//MSDN standard value
+#define PI 3.14159265358979323846
 
 namespace MK //Math_Knight shorthand
 {
@@ -17,10 +20,10 @@ namespace MK //Math_Knight shorthand
 	class Basic
 	{
 	public:
-		float LinearInterp();
-		float DegToRad();
-		float RadToDeg();
-		bool IsPowerOfTwo();
+		float LinearInterp(float v0, float v1, float t);
+		float DegToRad(float Deg);
+		float RadToDeg(float Rad);
+		bool IsPowerOfTwo(unsigned int num);
 	};
 
 	//TODO: Create & fillout constructor from 4 Vec4's
