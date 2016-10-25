@@ -185,7 +185,7 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
-		float Magnitude(const Vec3);
+		float Magnitude(const Vec3 &vector);
 		float DotProduct(const Vec3 &otherVec3);
 		float CrossProduct(const Vec3 &otherVec3);
 		Vec3 Normalize(const Vec3);
@@ -220,7 +220,7 @@ namespace MK //Math_Knight shorthand
 		#pragma endregion Constructors
 
 		#pragma region Custom_Functions
-		float Magnitude(const Vec2);
+		float Magnitude(const Vec2 &vector);
 		float DotProduct(const Vec2 &otherVec2);
 		float CrossProduct(const Vec2 &otherVec2);
 		float Lerp(const Vec2 &otherVec, float percentage);
