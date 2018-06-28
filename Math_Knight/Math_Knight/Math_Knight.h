@@ -48,6 +48,9 @@ namespace MK //Math_Knight shorthand
 		Mat4x4 RotMat4_Y(float degreeChange, Mat4x4 &otherMatrix);
 		Mat4x4 RotMat4_Z(float degreeChange, Mat4x4 &otherMatrix);
 		Mat4x4 TransformMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix);
+		float GetElement(int column, int row);
+		void SetElement(int column, int row, float value);
+		std::vector<std::vector<float>> GetAsVector();
 		#pragma endregion Custom_Functions
 
 		#pragma region Operator_Overloads
@@ -87,7 +90,8 @@ namespace MK //Math_Knight shorthand
 		Mat3x3 RotMat3_Z(float degreeChange, Mat3x3 &otherMatrix);
 		Mat3x3 TransformMat3(float xChange, float yChange, Mat3x3 &otherMatrix);
 		float GetElement(int column, int row);
-		void SetElement(int column, int row);
+		void SetElement(int column, int row, float value);
+		std::vector<std::vector<float>> GetAsVector();
 		#pragma endregion Custom_Functions
 		 
 		#pragma region Operator_Overloads

@@ -3,6 +3,7 @@
 namespace MK
 {
 #pragma region Constructors
+	//Default constructor that inits a 4x4 Matrix with all values set to 0.
 	Mat4x4::Mat4x4()
 	{
 		entries.zeroZero = 0.0f;
@@ -22,6 +23,7 @@ namespace MK
 		entries.threeTwo = 0.0f;
 		entries.threeThree = 0.0f;
 	}
+	//Init a 4x4 Matrix by using a Vector<Vector float>>.
 	Mat4x4::Mat4x4(std::vector<std::vector<float>> &matrix)
 	{
 		entries.zeroZero = matrix[0][0];
@@ -41,6 +43,7 @@ namespace MK
 		entries.threeTwo = matrix[3][2];
 		entries.threeThree = matrix[3][3];
 	}
+	//Init a 4x4 Matrix by using a [3][3] Array.
 	Mat4x4::Mat4x4(float matrix[3][3])
 	{
 		entries.zeroZero = matrix[0][0];
@@ -60,6 +63,7 @@ namespace MK
 		entries.threeTwo = matrix[3][2];
 		entries.threeThree = matrix[3][3];
 	}
+	//Init a 4x4 Matrix by using a [15] Array.
 	Mat4x4::Mat4x4(float matrix[15])
 	{
 		entries.zeroZero = matrix[0];
@@ -79,7 +83,7 @@ namespace MK
 		entries.threeTwo = matrix[14];
 		entries.threeThree = matrix[15];
 	}
-	//Why someone would do this to themselves, I have no idea...
+	//Init a 4x4 Matrix by hard-coding all values.
 	Mat4x4::Mat4x4(float zeroZero, float zeroOne, float zeroTwo, float zeroThree,
 		float oneZero, float oneOne, float oneTwo, float oneThree,
 		float twoZero, float twoOne, float twoTwo, float twoThree,
@@ -102,6 +106,7 @@ namespace MK
 		entries.threeTwo = threeTwo;
 		entries.threeThree = threeThree;
 	}
+	//Default deconstructor for a 4x4 Matrix.
 	Mat4x4::~Mat4x4()
 	{
 	
@@ -109,6 +114,7 @@ namespace MK
 #pragma endregion Constructors
 
 #pragma region Custom_Functions
+	//Returns an Orthographic Projection
 	Mat4x4 Mat4x4::OrthographicProjection(float left, float right, float top, float bottom, float near, float far, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =																		  //||-------The Matrix in column row major -------||
@@ -123,6 +129,7 @@ namespace MK
 
 		return changeMat * otherMatrix;
 	}
+	//Scale a Matrix by X, Y, Z.
 	Mat4x4 Mat4x4::ScaleMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =
@@ -137,6 +144,7 @@ namespace MK
 
 		return changeMat * otherMatrix;
 	}
+	//Rotate a Matrix on the X-axis by X degrees.
 	Mat4x4 Mat4x4::RotMat4_X(float degreeChange, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =
@@ -151,6 +159,7 @@ namespace MK
 
 		return changeMat * otherMatrix;
 	}
+	//Rotate a Matrix on the Y-axis by X degrees.
 	Mat4x4 Mat4x4::RotMat4_Y(float degreeChange, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =
@@ -165,6 +174,7 @@ namespace MK
 
 		return changeMat * otherMatrix;
 	}
+	//Rotate a Matrix on the Z-axis by X degrees.
 	Mat4x4 Mat4x4::RotMat4_Z(float degreeChange, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =
@@ -179,6 +189,7 @@ namespace MK
 
 		return changeMat * otherMatrix;
 	}
+	//Transform a Matrix by X, Y, and Z.
 	Mat4x4 Mat4x4::TransformMat4(float xChange, float yChange, float zChange, Mat4x4 &otherMatrix)
 	{
 		std::vector<std::vector<float>> changeMatrix =
@@ -192,6 +203,19 @@ namespace MK
 		Mat4x4 changeMat = Mat4x4(changeMatrix);
 
 		return changeMat * otherMatrix;
+	}
+	
+	std::vector<std::vector<float>> Mat4x4::GetAsVector()
+	{
+		std::vector<std::vector<float>> matrixVector = 
+		{
+			{ this->entries.zeroZero, this->entries.zeroOne, this->entries.zeroTwo, this->entries.zeroThree },
+			{ this->entries.oneZero, this->entries.oneOne, this->entries.oneTwo, this->entries.oneThree },
+			{ this->entries.twoZero, this->entries.twoOne, this->entries.twoTwo, this->entries.twoThree },
+			{ this->entries.threeZero, this->entries.threeOne, this->entries.threeTwo, this->entries.threeThree }
+		};
+
+		return matrixVector;
 	}
 #pragma endregion Custom_Functions
 
@@ -290,6 +314,23 @@ namespace MK
 	}
 	bool Mat4x4::operator == (const Mat4x4 &check)
 	{
+		std::vector<std::vector<float>> thisMat = this->GetAsVector();
+		Mat4x4 temp = check;
+		std::vector<std::vector<float>> compMat = temp.GetAsVector();
+
+		for (int i = 0; i <= 3; i++)
+		{
+			for (int j = 0; j <= 3; j++)
+			{
+				if (thisMat[i][j] != compMat[i][j])
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+		/*
 		//[0][0] == [0][0] 
 		if (entries.zeroZero == check.entries.zeroZero)
 		{
@@ -434,7 +475,7 @@ namespace MK
 		else
 		{
 			return false;
-		}
+		}*/
 	}
 #pragma endregion Operator_Overloads
 }

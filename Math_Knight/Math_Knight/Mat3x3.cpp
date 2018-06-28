@@ -168,6 +168,18 @@ namespace MK
 		//Multiply and return the result
 		return ChangeMat * otherMatrix;
 	}
+
+	std::vector<std::vector<float>> Mat3x3::GetAsVector()
+	{
+		std::vector<std::vector<float>> matrixVector =
+		{
+			{ this->entries.zeroZero, this->entries.zeroOne, this->entries.zeroTwo},
+			{ this->entries.oneZero, this->entries.oneOne, this->entries.oneTwo},
+			{ this->entries.twoZero, this->entries.twoOne, this->entries.twoTwo}
+		};
+
+		return matrixVector;
+	}
 #pragma endregion Custom_Functions
 
 #pragma region Operator_Overloads
@@ -237,6 +249,22 @@ namespace MK
 
 	bool Mat3x3::operator == (const Mat3x3 &check)
 	{
+		std::vector<std::vector<float>> thisMat = this->GetAsVector();
+		Mat3x3 temp = check;
+		std::vector<std::vector<float>> compMat = temp.GetAsVector();
+
+		for (int i = 0; i <= 2; i++)
+		{
+			for (int j = 0; j <= 2; j++)
+			{
+				if (thisMat[i][j] != compMat[i][j])
+				{
+					return false;
+				}
+			}
+		}
+
+		/*
 		//[0][0] == [0][0] 
 		if (entries.zeroZero == check.entries.zeroZero)
 		{
@@ -318,7 +346,7 @@ namespace MK
 		else
 		{
 			return false;
-		}
+		}*/
 	}
 #pragma endregion Operator_Overloads
 }

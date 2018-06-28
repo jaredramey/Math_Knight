@@ -15,19 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\ReadMe.txt" />
+    <ClCompile Include="Mat3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4x4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Math_Knight.h">
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Math_Knight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat3x3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat4x4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

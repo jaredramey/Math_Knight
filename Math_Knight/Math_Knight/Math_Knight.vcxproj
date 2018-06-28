@@ -73,14 +73,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\ReadMe.txt" />
+    <ClCompile Include="Basic.cpp" />
+    <ClCompile Include="Mat3x1.cpp" />
+    <ClCompile Include="Mat3x3.cpp" />
+    <ClCompile Include="Mat4x4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Math_Knight.h" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat3x3.cpp" />
-    <ClCompile Include="..\..\..\..\..\..\Brian%27s\Documents\GitHub\Math_Knight\Math_Knight\Math_Knight\Mat4x4.cpp" />
+    <ClInclude Include="Math_Knight.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
