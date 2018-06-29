@@ -241,6 +241,8 @@ namespace MK
 		entries.threeOne = ((entries.threeZero*factor.entries.threeOne) + (entries.threeOne*factor.entries.oneOne) + (entries.threeTwo*factor.entries.oneTwo) + (entries.threeThree*factor.entries.oneThree));
 		entries.threeTwo = ((entries.threeZero*factor.entries.threeTwo) + (entries.threeOne*factor.entries.twoOne) + (entries.threeTwo*factor.entries.twoTwo) + (entries.threeThree*factor.entries.twoThree));
 		entries.threeThree = ((entries.threeZero*factor.entries.threeThree) + (entries.threeOne*factor.entries.threeOne) + (entries.threeTwo*factor.entries.threeTwo) + (entries.threeThree*factor.entries.threeThree));
+
+		return factor;
 	}
 	Mat4x4 Mat4x4::operator + (const Mat4x4 &term)
 	{
@@ -265,6 +267,7 @@ namespace MK
 		entries.twoTwo = entries.threeTwo + term.entries.threeTwo;		//				{O, O, O, O}
 		entries.twoThree = entries.threeThree + term.entries.threeThree;//				{x, x, x, x}
 
+		return term;
 	}
 	Mat4x4 Mat4x4::operator - (const Mat4x4 &term)
 	{
@@ -288,6 +291,8 @@ namespace MK
 		entries.twoOne = entries.threeOne - term.entries.threeZero;		//				{O, O, O, O}
 		entries.twoTwo = entries.threeTwo - term.entries.threeTwo;		//				{O, O, O, O}
 		entries.twoThree = entries.threeThree - term.entries.threeThree;//				{x, x, x, x}
+
+		return term;
 	}
 	Mat4x4 Mat4x4::operator = (const Mat4x4 &equivalent)
 	{
@@ -311,6 +316,8 @@ namespace MK
 		entries.twoOne = equivalent.entries.threeZero;		//				{O, O, O, O}
 		entries.twoTwo = equivalent.entries.threeTwo;		//				{O, O, O, O}
 		entries.twoThree = equivalent.entries.threeThree;	//				{x, x, x, x}
+
+		return equivalent;
 	}
 	bool Mat4x4::operator == (const Mat4x4 &check)
 	{

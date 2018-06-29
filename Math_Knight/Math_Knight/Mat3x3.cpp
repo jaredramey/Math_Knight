@@ -67,8 +67,7 @@ namespace MK
 		entries.twoZero = twoZero;
 		entries.twoOne = twoOne;
 		entries.twoTwo = twoTwo;
-	}
-	
+	}	
 	//Default deconstructor
 	Mat3x3::~Mat3x3()
 	{
@@ -95,7 +94,6 @@ namespace MK
 		return ChangeMat * otherMatrix;
 
 	}
-
 	//Rotate Mat3x3 on the X-axis by x degrees
 	Mat3x3 Mat3x3::RotMat3_X(float degreeChange, Mat3x3 &otherMatrix)
 	{
@@ -114,7 +112,6 @@ namespace MK
 		//Multiply and return the result
 		return ChangeMat * otherMatrix;
 	}
-
 	//Rotate Mat3x3 on the Y-axis by x degrees
 	Mat3x3 Mat3x3::RotMat3_Y(float degreeChange, Mat3x3 &otherMatrix)
 	{
@@ -132,7 +129,6 @@ namespace MK
 		//Multiply and return the result
 		return ChangeMat * otherMatrix;
 	}
-
 	//Rotate Mat3x3 on the Z-axis by x degrees
 	Mat3x3 Mat3x3::RotMat3_Z(float degreeChange, Mat3x3 &otherMatrix)
 	{
@@ -150,7 +146,6 @@ namespace MK
 		//Multiply and return the result
 		return ChangeMat * otherMatrix;
 	}
-
 	//Transform matrix by X and Y
 	Mat3x3 Mat3x3::TransformMat3(float xChange, float yChange, Mat3x3 &otherMatrix)
 	{
@@ -168,7 +163,6 @@ namespace MK
 		//Multiply and return the result
 		return ChangeMat * otherMatrix;
 	}
-
 	std::vector<std::vector<float>> Mat3x3::GetAsVector()
 	{
 		std::vector<std::vector<float>> matrixVector =
@@ -197,6 +191,8 @@ namespace MK
 		entries.twoZero = ((entries.twoZero*factor.entries.zeroZero) + (entries.twoOne*factor.entries.zeroOne) + (entries.twoTwo*factor.entries.zeroTwo));		//			{O, O, O}
 		entries.twoOne = ((entries.twoZero*factor.entries.oneZero) + (entries.twoOne*factor.entries.oneOne) + (entries.twoTwo*factor.entries.oneTwo));			//			{O, O, O}
 		entries.twoTwo = ((entries.twoZero*factor.entries.twoZero) + (entries.twoOne*factor.entries.twoOne) + (entries.twoTwo*factor.entries.twoTwo));			//			{x, x, x}
+
+		return factor;
 	}
 
 	Mat3x3 Mat3x3::operator + (const Mat3x3 &term)
@@ -213,6 +209,8 @@ namespace MK
 		entries.twoZero = entries.twoZero + term.entries.twoZero;		//			{O, O, O}
 		entries.twoOne = entries.twoOne + term.entries.twoZero;			//			{O, O, O}
 		entries.twoTwo = entries.twoTwo + term.entries.zeroTwo;			//			{x, x, x}
+
+		return term;
 	}
 
 	Mat3x3 Mat3x3::operator - (const Mat3x3 &term)
@@ -229,6 +227,8 @@ namespace MK
 		entries.twoZero = entries.twoZero - term.entries.twoZero;		//			{O, O, O}
 		entries.twoOne = entries.twoOne - term.entries.twoZero;			//			{O, O, O}
 		entries.twoTwo = entries.twoTwo - term.entries.zeroTwo;			//			{x, x, x}
+
+		return term;
 	}
 
 	Mat3x3 Mat3x3::operator = (const Mat3x3 &equivalent)
@@ -245,6 +245,8 @@ namespace MK
 		entries.twoZero = entries.twoZero = equivalent.entries.twoZero;				//			{O, O, O}
 		entries.twoOne = entries.twoOne = equivalent.entries.twoZero;				//			{O, O, O}
 		entries.twoTwo = entries.twoTwo = equivalent.entries.zeroTwo;				//			{x, x, x}
+
+		return equivalent;
 	}
 
 	bool Mat3x3::operator == (const Mat3x3 &check)
@@ -264,6 +266,7 @@ namespace MK
 			}
 		}
 
+		return true;
 		/*
 		//[0][0] == [0][0] 
 		if (entries.zeroZero == check.entries.zeroZero)
